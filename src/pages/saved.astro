@@ -1,0 +1,25 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { course, lessonUrl } from '../lib/course';
+---
+<SiteLayout title="Your learning" wide>
+  <div class="simple-page">
+    <h1>Your place in the course</h1>
+    <p class="intro">Save chapters to revisit and mark what you have read. Reading progress and knowledge checks are separate; neither unlocks nor hides anything.</p>
+    <div class="progress-summary">
+      <p data-progress-count>0 of {course.lessons.length} read</p>
+      <progress data-course-progress value="0" max={course.lessons.length} aria-label="Lessons marked as read"></progress>
+      <p data-check-count>Knowledge checks are saved separately from reading completion.</p>
+      <a class="button" data-continue hidden href={lessonUrl(1)}>Continue learning</a>
+      <p class="storage-status" data-storage-status>Saved only in this browser. No sign-in, analytics, or remote progress database.</p>
+    </div>
+    <section><h2>Saved for another look</h2><p data-no-saved>No saved chapters yet. Use <strong>Save lesson</strong> at the top of any chapter to keep it here.</p>
+      <ol class="lesson-list" data-saved-list>{course.lessons.map(lesson => <li data-saved-lesson={lesson.number} hidden><a href={lessonUrl(lesson.number)}><span class="lesson-index">{String(lesson.number).padStart(2, '0')}</span><strong>{lesson.title}</strong></a></li>)}</ol>
+    </section>
+    <section><h2>You control the record</h2><p>This site uses localStorage for read markers, saved lessons, your last section, check answers, and the theme choice. Nothing is sent to an account. Browser or private-browsing cleanup can remove this data. The hosting provider still serves ordinary web requests.</p><p>Clearing learning data removes read markers, bookmarks, saved place, and check answers from this browser. It leaves your theme choice unchanged and does not affect another device.</p>
+      <button class="button secondary" data-clear-progress disabled>Clear learning data</button>
+      <div class="clear-confirm" data-clear-confirm hidden><p><strong>Clear this browser's learning record?</strong> There is no remote backup or undo.</p><button class="button" data-confirm-clear>Yes, clear learning data</button><button class="button secondary" data-cancel-clear>Keep my progress</button></div>
+    </section>
+    <noscript><p>JavaScript is off. Local progress controls are unavailable, but every lesson remains accessible from the course index.</p></noscript>
+  </div>
+</SiteLayout>

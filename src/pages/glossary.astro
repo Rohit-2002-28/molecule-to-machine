@@ -1,0 +1,42 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { glossary, termId } from '../data/glossary';
+import { course, lessonUrl } from '../lib/course';
+const terms = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
+const letters = [...new Set(terms.map(term => term.term[0]))];
+const available = new Set(course.lessons.map(lesson => lesson.number));
+---
+<SiteLayout title="Glossary" wide>
+  <div class="simple-page">
+    <h1>A vocabulary for the journey</h1>
+    <p class="intro">Concise starting definitions, with the distinctions that matter. Follow each term back to the full lesson for equations, assumptions, and source context.</p>
+    <div class="glossary-filter"><label for="term-filter">Find a term or an idea</label><input id="term-filter" type="search" placeholder="Try orbital, state, or error..." /><p data-term-status role="status">{terms.length} terms, linked to their lesson context.</p></div>
+    <nav class="alphabet" aria-label="Glossary alphabet">{letters.map(letter => <a href={`#letter-${letter}`}>{letter}</a>)}</nav>
+    {letters.map(letter => <section class="glossary-letter" id={`letter-${letter}`} data-letter><h2>{letter}</h2><dl>
+      {terms.filter(term => term.term[0] === letter).map(term => <div class="glossary-entry" id={termId(term.term)} data-term>
+        <dt>{term.term}</dt><dd>{term.definition}<p class="term-context">{term.context}</p><p class="term-links">{term.lessons.filter(number => available.has(number)).map(number => <a href={lessonUrl(number)}>Lesson {number}</a>)}</p></dd>
+      </div>)}
+    </dl></section>)}
+    <p data-term-empty hidden>No terms match. Try a shorter word, or search the full course from the header.</p>
+  </div>
+</SiteLayout>
+<script>
+  const input = document.querySelector<HTMLInputElement>('#term-filter');
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-term]')];
+  const status = document.querySelector<HTMLElement>('[data-term-status]');
+  const empty = document.querySelector<HTMLElement>('[data-term-empty]');
+  const filter = () => {
+    const query = input?.value.trim().toLocaleLowerCase() ?? '';
+    let count = 0;
+    for (const entry of entries) {
+      entry.hidden = !entry.textContent?.toLocaleLowerCase().includes(query);
+      if (!entry.hidden) count++;
+    }
+    for (const section of document.querySelectorAll<HTMLElement>('[data-letter]')) section.hidden = !section.querySelector('[data-term]:not([hidden])');
+    if (status) status.textContent = `${count} matching ${count === 1 ? 'term' : 'terms'}.`;
+    if (empty) empty.hidden = count > 0;
+  };
+  input?.addEventListener('input', filter);
+  const query = new URLSearchParams(location.search).get('q');
+  if (query && input) { input.value = query; filter(); }
+</script>

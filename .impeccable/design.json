@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-28T00:04:59.676Z",
+  "title": "Design System: From Molecule to Machine",
+  "extensions": {
+    "colorMeta": {
+      "page": {
+        "role": "neutral",
+        "displayName": "White paper",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(26.43% 0 0)", "oklch(37.86% 0 0)", "oklch(49.29% 0 0)", "oklch(60.71% 0 0)", "oklch(72.14% 0 0)", "oklch(83.57% 0 0)", "oklch(95% 0 0)"]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Cool working paper",
+        "tonalRamp": ["oklch(15% 0.0057 264.53)", "oklch(26.43% 0.0057 264.53)", "oklch(37.86% 0.0057 264.53)", "oklch(49.29% 0.0057 264.53)", "oklch(60.71% 0.0057 264.53)", "oklch(72.14% 0.0057 264.53)", "oklch(83.57% 0.0057 264.53)", "oklch(95% 0.0057 264.53)"]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Index paper",
+        "tonalRamp": ["oklch(15% 0.0074 260.73)", "oklch(26.43% 0.0074 260.73)", "oklch(37.86% 0.0074 260.73)", "oklch(49.29% 0.0074 260.73)", "oklch(60.71% 0.0074 260.73)", "oklch(72.14% 0.0074 260.73)", "oklch(83.57% 0.0074 260.73)", "oklch(95% 0.0074 260.73)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink blue",
+        "tonalRamp": ["oklch(15% 0.0532 251.11)", "oklch(26.43% 0.0532 251.11)", "oklch(37.86% 0.0532 251.11)", "oklch(49.29% 0.0532 251.11)", "oklch(60.71% 0.0532 251.11)", "oklch(72.14% 0.0532 251.11)", "oklch(83.57% 0.0532 251.11)", "oklch(95% 0.0532 251.11)"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Slate annotation",
+        "tonalRamp": ["oklch(15% 0.0392 251.32)", "oklch(26.43% 0.0392 251.32)", "oklch(37.86% 0.0392 251.32)", "oklch(49.29% 0.0392 251.32)", "oklch(60.71% 0.0392 251.32)", "oklch(72.14% 0.0392 251.32)", "oklch(83.57% 0.0392 251.32)", "oklch(95% 0.0392 251.32)"]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Cobalt index ink",
+        "tonalRamp": ["oklch(15% 0.1807 262.84)", "oklch(26.43% 0.1807 262.84)", "oklch(37.86% 0.1807 262.84)", "oklch(49.29% 0.1807 262.84)", "oklch(60.71% 0.1807 262.84)", "oklch(72.14% 0.1807 262.84)", "oklch(83.57% 0.1807 262.84)", "oklch(95% 0.1807 262.84)"]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Deep cobalt",
+        "tonalRamp": ["oklch(15% 0.1569 262.93)", "oklch(26.43% 0.1569 262.93)", "oklch(37.86% 0.1569 262.93)", "oklch(49.29% 0.1569 262.93)", "oklch(60.71% 0.1569 262.93)", "oklch(72.14% 0.1569 262.93)", "oklch(83.57% 0.1569 262.93)", "oklch(95% 0.1569 262.93)"]
+      },
+      "tint": {
+        "role": "primary",
+        "displayName": "Cobalt wash",
+        "tonalRamp": ["oklch(15% 0.0203 264.47)", "oklch(26.43% 0.0203 264.47)", "oklch(37.86% 0.0203 264.47)", "oklch(49.29% 0.0203 264.47)", "oklch(60.71% 0.0203 264.47)", "oklch(72.14% 0.0203 264.47)", "oklch(83.57% 0.0203 264.47)", "oklch(95% 0.0203 264.47)"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Blue-gray rule",
+        "tonalRamp": ["oklch(15% 0.021 254.93)", "oklch(26.43% 0.021 254.93)", "oklch(37.86% 0.021 254.93)", "oklch(49.29% 0.021 254.93)", "oklch(60.71% 0.021 254.93)", "oklch(72.14% 0.021 254.93)", "oklch(83.57% 0.021 254.93)", "oklch(95% 0.021 254.93)"]
+      },
+      "secondary": {
+        "role": "secondary",
+        "displayName": "Comparison plum",
+        "tonalRamp": ["oklch(15% 0.1109 343.88)", "oklch(26.43% 0.1109 343.88)", "oklch(37.86% 0.1109 343.88)", "oklch(49.29% 0.1109 343.88)", "oklch(60.71% 0.1109 343.88)", "oklch(72.14% 0.1109 343.88)", "oklch(83.57% 0.1109 343.88)", "oklch(95% 0.1109 343.88)"]
+      },
+      "good": {
+        "role": "semantic",
+        "displayName": "Confirmation green",
+        "tonalRamp": ["oklch(15% 0.0875 162.25)", "oklch(26.43% 0.0875 162.25)", "oklch(37.86% 0.0875 162.25)", "oklch(49.29% 0.0875 162.25)", "oklch(60.71% 0.0875 162.25)", "oklch(72.14% 0.0875 162.25)", "oklch(83.57% 0.0875 162.25)", "oklch(95% 0.0875 162.25)"]
+      },
+      "good-ground": {
+        "role": "semantic",
+        "displayName": "Confirmation paper",
+        "tonalRamp": ["oklch(15% 0.0132 159.92)", "oklch(26.43% 0.0132 159.92)", "oklch(37.86% 0.0132 159.92)", "oklch(49.29% 0.0132 159.92)", "oklch(60.71% 0.0132 159.92)", "oklch(72.14% 0.0132 159.92)", "oklch(83.57% 0.0132 159.92)", "oklch(95% 0.0132 159.92)"]
+      },
+      "warning": {
+        "role": "semantic",
+        "displayName": "Revisit amber",
+        "tonalRamp": ["oklch(15% 0.1083 48.59)", "oklch(26.43% 0.1083 48.59)", "oklch(37.86% 0.1083 48.59)", "oklch(49.29% 0.1083 48.59)", "oklch(60.71% 0.1083 48.59)", "oklch(72.14% 0.1083 48.59)", "oklch(83.57% 0.1083 48.59)", "oklch(95% 0.1083 48.59)"]
+      },
+      "warning-ground": {
+        "role": "semantic",
+        "displayName": "Revisit paper",
+        "tonalRamp": ["oklch(15% 0.0205 67.58)", "oklch(26.43% 0.0205 67.58)", "oklch(37.86% 0.0205 67.58)", "oklch(49.29% 0.0205 67.58)", "oklch(60.71% 0.0205 67.58)", "oklch(72.14% 0.0205 67.58)", "oklch(83.57% 0.0205 67.58)", "oklch(95% 0.0205 67.58)"]
+      },
+      "focus": {
+        "role": "semantic",
+        "displayName": "Keyboard copper",
+        "tonalRamp": ["oklch(15% 0.1372 46.47)", "oklch(26.43% 0.1372 46.47)", "oklch(37.86% 0.1372 46.47)", "oklch(49.29% 0.1372 46.47)", "oklch(60.71% 0.1372 46.47)", "oklch(72.14% 0.1372 46.47)", "oklch(83.57% 0.1372 46.47)", "oklch(95% 0.1372 46.47)"]
+      },
+      "dark-page": {
+        "role": "neutral",
+        "displayName": "Night paper",
+        "tonalRamp": ["oklch(15% 0.0333 249.38)", "oklch(26.43% 0.0333 249.38)", "oklch(37.86% 0.0333 249.38)", "oklch(49.29% 0.0333 249.38)", "oklch(60.71% 0.0333 249.38)", "oklch(72.14% 0.0333 249.38)", "oklch(83.57% 0.0333 249.38)", "oklch(95% 0.0333 249.38)"]
+      },
+      "dark-ground": {
+        "role": "neutral",
+        "displayName": "Night working paper",
+        "tonalRamp": ["oklch(15% 0.0395 248.03)", "oklch(26.43% 0.0395 248.03)", "oklch(37.86% 0.0395 248.03)", "oklch(49.29% 0.0395 248.03)", "oklch(60.71% 0.0395 248.03)", "oklch(72.14% 0.0395 248.03)", "oklch(83.57% 0.0395 248.03)", "oklch(95% 0.0395 248.03)"]
+      },
+      "dark-rail": {
+        "role": "neutral",
+        "displayName": "Night index paper",
+        "tonalRamp": ["oklch(15% 0.0377 247.97)", "oklch(26.43% 0.0377 247.97)", "oklch(37.86% 0.0377 247.97)", "oklch(49.29% 0.0377 247.97)", "oklch(60.71% 0.0377 247.97)", "oklch(72.14% 0.0377 247.97)", "oklch(83.57% 0.0377 247.97)", "oklch(95% 0.0377 247.97)"]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Night reading ink",
+        "tonalRamp": ["oklch(15% 0.0143 254.61)", "oklch(26.43% 0.0143 254.61)", "oklch(37.86% 0.0143 254.61)", "oklch(49.29% 0.0143 254.61)", "oklch(60.71% 0.0143 254.61)", "oklch(72.14% 0.0143 254.61)", "oklch(83.57% 0.0143 254.61)", "oklch(95% 0.0143 254.61)"]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Night slate annotation",
+        "tonalRamp": ["oklch(15% 0.0291 251.5)", "oklch(26.43% 0.0291 251.5)", "oklch(37.86% 0.0291 251.5)", "oklch(49.29% 0.0291 251.5)", "oklch(60.71% 0.0291 251.5)", "oklch(72.14% 0.0291 251.5)", "oklch(83.57% 0.0291 251.5)", "oklch(95% 0.0291 251.5)"]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Night cobalt index ink",
+        "tonalRamp": ["oklch(15% 0.1059 265.68)", "oklch(26.43% 0.1059 265.68)", "oklch(37.86% 0.1059 265.68)", "oklch(49.29% 0.1059 265.68)", "oklch(60.71% 0.1059 265.68)", "oklch(72.14% 0.1059 265.68)", "oklch(83.57% 0.1059 265.68)", "oklch(95% 0.1059 265.68)"]
+      },
+      "dark-accent-hover": {
+        "role": "primary",
+        "displayName": "Night cobalt hover",
+        "tonalRamp": ["oklch(15% 0.0619 265.96)", "oklch(26.43% 0.0619 265.96)", "oklch(37.86% 0.0619 265.96)", "oklch(49.29% 0.0619 265.96)", "oklch(60.71% 0.0619 265.96)", "oklch(72.14% 0.0619 265.96)", "oklch(83.57% 0.0619 265.96)", "oklch(95% 0.0619 265.96)"]
+      },
+      "dark-tint": {
+        "role": "primary",
+        "displayName": "Night cobalt wash",
+        "tonalRamp": ["oklch(15% 0.07 258.29)", "oklch(26.43% 0.07 258.29)", "oklch(37.86% 0.07 258.29)", "oklch(49.29% 0.07 258.29)", "oklch(60.71% 0.07 258.29)", "oklch(72.14% 0.07 258.29)", "oklch(83.57% 0.07 258.29)", "oklch(95% 0.07 258.29)"]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Night blue-gray rule",
+        "tonalRamp": ["oklch(15% 0.0489 250.06)", "oklch(26.43% 0.0489 250.06)", "oklch(37.86% 0.0489 250.06)", "oklch(49.29% 0.0489 250.06)", "oklch(60.71% 0.0489 250.06)", "oklch(72.14% 0.0489 250.06)", "oklch(83.57% 0.0489 250.06)", "oklch(95% 0.0489 250.06)"]
+      },
+      "dark-secondary": {
+        "role": "secondary",
+        "displayName": "Night comparison plum",
+        "tonalRamp": ["oklch(15% 0.0934 339.24)", "oklch(26.43% 0.0934 339.24)", "oklch(37.86% 0.0934 339.24)", "oklch(49.29% 0.0934 339.24)", "oklch(60.71% 0.0934 339.24)", "oklch(72.14% 0.0934 339.24)", "oklch(83.57% 0.0934 339.24)", "oklch(95% 0.0934 339.24)"]
+      },
+      "dark-good": {
+        "role": "semantic",
+        "displayName": "Night confirmation green",
+        "tonalRamp": ["oklch(15% 0.0775 160.52)", "oklch(26.43% 0.0775 160.52)", "oklch(37.86% 0.0775 160.52)", "oklch(49.29% 0.0775 160.52)", "oklch(60.71% 0.0775 160.52)", "oklch(72.14% 0.0775 160.52)", "oklch(83.57% 0.0775 160.52)", "oklch(95% 0.0775 160.52)"]
+      },
+      "dark-good-ground": {
+        "role": "semantic",
+        "displayName": "Night confirmation paper",
+        "tonalRamp": ["oklch(15% 0.0415 167.75)", "oklch(26.43% 0.0415 167.75)", "oklch(37.86% 0.0415 167.75)", "oklch(49.29% 0.0415 167.75)", "oklch(60.71% 0.0415 167.75)", "oklch(72.14% 0.0415 167.75)", "oklch(83.57% 0.0415 167.75)", "oklch(95% 0.0415 167.75)"]
+      },
+      "dark-warning": {
+        "role": "semantic",
+        "displayName": "Night revisit amber",
+        "tonalRamp": ["oklch(15% 0.0819 68.75)", "oklch(26.43% 0.0819 68.75)", "oklch(37.86% 0.0819 68.75)", "oklch(49.29% 0.0819 68.75)", "oklch(60.71% 0.0819 68.75)", "oklch(72.14% 0.0819 68.75)", "oklch(83.57% 0.0819 68.75)", "oklch(95% 0.0819 68.75)"]
+      },
+      "dark-warning-ground": {
+        "role": "semantic",
+        "displayName": "Night revisit paper",
+        "tonalRamp": ["oklch(15% 0.0281 59.6)", "oklch(26.43% 0.0281 59.6)", "oklch(37.86% 0.0281 59.6)", "oklch(49.29% 0.0281 59.6)", "oklch(60.71% 0.0281 59.6)", "oklch(72.14% 0.0281 59.6)", "oklch(83.57% 0.0281 59.6)", "oklch(95% 0.0281 59.6)"]
+      },
+      "dark-focus": {
+        "role": "semantic",
+        "displayName": "Night keyboard copper",
+        "tonalRamp": ["oklch(15% 0.1079 75.36)", "oklch(26.43% 0.1079 75.36)", "oklch(37.86% 0.1079 75.36)", "oklch(49.29% 0.1079 75.36)", "oklch(60.71% 0.1079 75.36)", "oklch(72.14% 0.1079 75.36)", "oklch(83.57% 0.1079 75.36)", "oklch(95% 0.1079 75.36)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Page heading", "purpose": "Default page and lesson h1, not the course opener's local display treatment."},
+      "headline": {"displayName": "Section heading", "purpose": "General h2; original-lesson headings have the reading-specific adjustments documented in DESIGN.md."},
+      "title": {"displayName": "Subsection heading", "purpose": "General h3 below the section heading."},
+      "ui": {"displayName": "Interface and supplement text", "purpose": "Interface surroundings, supplemental explanations, and default native fields."},
+      "body": {"displayName": "Original lesson prose", "purpose": "Sustained serif reading within the constrained original-text column."},
+      "label": {"displayName": "Quiet metadata", "purpose": "Supporting metadata and section navigation."},
+      "button": {"displayName": "Action label", "purpose": "Stronger sans-serif labels on primary and secondary actions."},
+      "curriculum": {"displayName": "Curriculum link", "purpose": "Compact multi-line lesson navigation, strengthened for the current page."},
+      "code": {"displayName": "Preformatted code", "purpose": "System monospace in a separately scrollable code surface; inline code scales with prose."}
+    },
+    "shadows": [
+      {"name": "dialog-lift", "value": "0 18px 65px rgb(12 26 47 / 22%)", "purpose": "Modal utility separation; the source backdrop is rgb(9 23 41 / 48%)."},
+      {"name": "storage-notice-lift", "value": "0 7px 25px rgb(12 26 47 / 10%)", "purpose": "Local-storage status notice, fixed on wide screens and in flow on mobile."}
+    ],
+    "motion": [
+      {"name": "button-background", "value": "background-color 150ms ease-out", "purpose": "Primary and secondary button background changes without movement or scale."},
+      {"name": "reduced-motion-duration", "value": ".01ms", "purpose": "Reduced-motion animation and transition duration override; scrolling returns to auto."}
+    ],
+    "breakpoints": [
+      {"name": "max-section-index-collapse", "value": "1250px"},
+      {"name": "max-curriculum-stack", "value": "960px"},
+      {"name": "max-rail-to-dialog", "value": "760px"},
+      {"name": "max-single-column-controls", "value": "390px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ready-state primary lesson action. Hover, keyboard focus, pressed, and disabled styling follow src\\styles\\site.css.",
+      "html": "<button class=\"ds-primary\" type=\"button\" aria-pressed=\"false\">Mark lesson as read</button>",
+      "css": ".ds-primary { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 45px; padding: .65rem 1.15rem; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent); color: var(--page); font-family: var(--ui); font-size: 1rem; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 150ms ease-out; } .ds-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--page); } .ds-primary[aria-pressed='true'] { background: var(--good-ground); border-color: var(--good); color: var(--good); } .ds-primary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-primary:disabled { cursor: not-allowed; opacity: .65; } @media (prefers-reduced-motion: reduce) { .ds-primary { transition-duration: .01ms !important; } } @media (prefers-contrast: more) { .ds-primary { border-width: 2px; } }"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ready-state secondary model action; no model computation is attached to this visual specimen.",
+      "html": "<button class=\"ds-secondary\" type=\"button\">Update model</button>",
+      "css": ".ds-secondary { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 45px; padding: .65rem 1.15rem; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--accent); font-family: var(--ui); font-size: 1rem; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer; transition: background-color 150ms ease-out; } .ds-secondary:hover { background: var(--tint); border-color: var(--accent); } .ds-secondary[aria-pressed='true'] { background: var(--good-ground); border-color: var(--good); color: var(--good); } .ds-secondary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-secondary:disabled { cursor: not-allowed; opacity: .65; } @media (prefers-reduced-motion: reduce) { .ds-secondary { transition-duration: .01ms !important; } } @media (prefers-contrast: more) { .ds-secondary { border-width: 2px; } }"
+    },
+    {
+      "name": "Pressed lesson action",
+      "kind": "button",
+      "refersTo": "button-pressed",
+      "description": "The explicit pressed-state color treatment shared by reading and save actions, not an answer-correctness indicator.",
+      "html": "<button class=\"ds-pressed\" type=\"button\" aria-pressed=\"true\">Mark lesson as read</button>",
+      "css": ".ds-pressed { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 45px; padding: .65rem 1.15rem; border: 1px solid var(--accent); border-radius: 4px; background: var(--accent); color: var(--page); font-family: var(--ui); font-size: 1rem; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color 150ms ease-out; } .ds-pressed:hover { background: var(--accent-hover); border-color: var(--accent-hover); } .ds-pressed[aria-pressed='true'] { background: var(--good-ground); border-color: var(--good); color: var(--good); } .ds-pressed:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-pressed:disabled { cursor: not-allowed; opacity: .65; } @media (prefers-reduced-motion: reduce) { .ds-pressed { transition-duration: .01ms !important; } } @media (prefers-contrast: more) { .ds-pressed { border-width: 2px; } }"
+    },
+    {
+      "name": "Text action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "The shown-state resume link from the lesson header; navigation remains a native anchor.",
+      "html": "<a class=\"ds-text-action\" href=\"#\">Resume at your saved section</a>",
+      "css": ".ds-text-action { border: 0; background: transparent; color: var(--accent); padding: .5rem 0; font-family: var(--ui); font-size: 1rem; line-height: 1.5; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; } .ds-text-action:hover { color: var(--accent-hover); } .ds-text-action:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }"
+    },
+    {
+      "name": "Icon action",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Compact curriculum control with the source SVG and an accessible text label.",
+      "html": "<button class=\"ds-icon-action\" type=\"button\" aria-label=\"Open curriculum\" aria-haspopup=\"dialog\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 6 H20 M4 12 H20 M4 18 H20\" /></svg></button>",
+      "css": ".ds-icon-action { width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--ui); font-size: 1.5rem; line-height: 1.5; background: transparent; border: 1px solid transparent; border-radius: 4px; color: var(--ink); cursor: pointer; } .ds-icon-action svg { fill: none; stroke: currentColor; stroke-width: 1.6; } .ds-icon-action:hover { background: var(--tint); } .ds-icon-action:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-icon-action:disabled { cursor: not-allowed; opacity: .65; }"
+    },
+    {
+      "name": "Labeled native number field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A native number input in its recurring mini-lab label treatment, with the source active-space field constraints.",
+      "html": "<label class=\"ds-field\" for=\"ds-orbitals\">Spatial orbitals<input class=\"ds-number\" id=\"ds-orbitals\" name=\"orbitals\" type=\"number\" min=\"1\" max=\"64\" step=\"1\" value=\"4\" required /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: .4rem; font-family: var(--ui); font-size: .87rem; font-weight: 600; line-height: 1.5; color: var(--ink); } .ds-number { font: inherit; min-height: 44px; min-width: 0; width: 100%; color: var(--ink); background: var(--page); border: 1px solid var(--line); border-radius: 4px; padding: .5rem .65rem; } .ds-number::placeholder { color: var(--muted); opacity: 1; } .ds-number:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } @media (max-width: 760px) { .ds-field { font-size: .82rem; } } @media (prefers-contrast: more) { .ds-number { border-width: 2px; } }"
+    },
+    {
+      "name": "Current curriculum link",
+      "kind": "nav",
+      "refersTo": "curriculum-link",
+      "description": "Number, multi-line lesson label, and separate read marker on index paper; the displayed label is a course-journey label.",
+      "html": "<nav class=\"ds-curriculum\" aria-label=\"Curriculum\"><a class=\"ds-curriculum-link\" href=\"#\" aria-current=\"page\"><span class=\"ds-lesson-index\">01</span><span>Ask a question</span><span class=\"ds-lesson-state\" aria-label=\"Read\">&#10003;</span></a></nav>",
+      "css": ".ds-curriculum { background: var(--rail); color: var(--ink); font-family: var(--ui); line-height: 1.5; } .ds-curriculum-link { display: grid; grid-template-columns: 1.4rem 1fr 12px; gap: .45rem; align-items: baseline; text-decoration: none; color: var(--ink); padding: .5rem .45rem; font-size: .87rem; line-height: 1.32; border: 1px solid transparent; border-radius: 3px; } .ds-curriculum-link:hover { background: var(--page); color: var(--accent); } .ds-curriculum-link[aria-current='page'] { background: var(--tint); color: var(--accent); border-color: var(--line); font-weight: 650; } .ds-curriculum-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-lesson-index { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .8rem; } .ds-lesson-state { color: var(--good); font-size: .82rem; } @media (forced-colors: active) { .ds-lesson-state { color: LinkText; } }"
+    },
+    {
+      "name": "Numbered concept plate",
+      "kind": "custom",
+      "refersTo": "concept-plate",
+      "description": "Static figure and focusable scroll region using the contracts geometry from src\\components\\ConceptPlate.astro. Specimen labels describe that diagram, not a new lesson or calculation.",
+      "html": "<figure class=\"ds-plate\" aria-labelledby=\"ds-plate-title\"><div class=\"ds-plate-heading\"><h2 id=\"ds-plate-title\">Meaning travels across the API boundary</h2><span>Concept plate 01</span></div><div class=\"ds-diagram-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Scrollable diagram: typed input, algorithm, and state\"><svg class=\"ds-diagram\" viewBox=\"0 0 640 250\" role=\"img\" aria-labelledby=\"ds-plate-title ds-plate-description\"><defs><marker id=\"ds-plate-arrow\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"3\" orient=\"auto\" markerUnits=\"strokeWidth\"><path d=\"M0,0 L0,6 L6,3 Z\" fill=\"currentColor\" stroke=\"none\" /></marker></defs><rect class=\"ds-paper\" x=\"35\" y=\"70\" width=\"150\" height=\"85\" rx=\"4\" /><rect class=\"ds-tinted\" x=\"245\" y=\"70\" width=\"150\" height=\"85\" rx=\"4\" /><rect class=\"ds-paper\" x=\"455\" y=\"70\" width=\"150\" height=\"85\" rx=\"4\" /><path class=\"ds-accent-line\" marker-end=\"url(#ds-plate-arrow)\" d=\"M185 112 H238\" /><path class=\"ds-accent-line\" marker-end=\"url(#ds-plate-arrow)\" d=\"M395 112 H448\" /><text x=\"110\" y=\"120\" text-anchor=\"middle\">Molecule</text><text x=\"320\" y=\"120\" text-anchor=\"middle\">Algorithm</text><text x=\"530\" y=\"120\" text-anchor=\"middle\">State</text><text x=\"110\" y=\"190\" text-anchor=\"middle\">Typed input</text><text x=\"320\" y=\"190\" text-anchor=\"middle\">Settings + method</text><text x=\"530\" y=\"190\" text-anchor=\"middle\">Capabilities</text></svg></div><figcaption id=\"ds-plate-description\">Meaning travels across the API boundary.</figcaption><ol class=\"ds-plate-key\"><li><span class=\"ds-key-number\">01</span>Typed input</li><li><span class=\"ds-key-number\">02</span>Settings + method</li><li><span class=\"ds-key-number\">03</span>Capabilities</li></ol></figure>",
+      "css": ".ds-plate { margin: 1.8rem 0 2.5rem; padding: 1.25rem 1.25rem 1.1rem; border: 1px solid var(--line); background: var(--ground); color: var(--ink); font-family: var(--ui); line-height: 1.5; } .ds-plate-heading { display: flex; gap: .7rem; align-items: baseline; justify-content: space-between; } .ds-plate-heading h2 { margin: 0; font-size: 1.14rem; font-weight: 650; line-height: 1.3; letter-spacing: -.012em; text-wrap: balance; } .ds-plate-heading > span { font-size: .73rem; color: var(--muted); white-space: nowrap; } .ds-diagram-scroll { overflow-x: auto; margin: 1rem 0 .65rem; } .ds-diagram-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-diagram { width: 100%; min-width: 550px; display: block; color: var(--accent); } .ds-diagram text { font-family: var(--ui); font-size: 17px; fill: var(--ink); } .ds-paper { fill: var(--page); stroke: var(--line); stroke-width: 1.5; } .ds-tinted { fill: var(--tint); stroke: var(--accent); stroke-width: 1; } .ds-accent-line { fill: none; stroke: var(--accent); stroke-width: 2; } .ds-plate figcaption { font-size: .9rem; line-height: 1.55; color: var(--muted); } .ds-plate-key { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 1rem 0 0; gap: .9rem; margin: 1rem 0 0; border-top: 1px solid var(--line); } .ds-plate-key li { font-size: .81rem; line-height: 1.35; display: flex; gap: .5rem; } .ds-key-number { color: var(--accent); font-weight: 650; } @media (max-width: 760px) { .ds-plate { padding: 1rem; margin: 1.6rem 0 2rem; } .ds-plate-heading { display: block; } .ds-plate-heading > span { display: block; margin-top: .45rem; } .ds-plate-key { grid-template-columns: 1fr; gap: .6rem; } .ds-plate figcaption { font-size: .87rem; } .ds-diagram-scroll::after { content: 'Scroll the diagram horizontally to explore every label.'; display: block; position: sticky; left: 0; font-size: .75rem; color: var(--muted); margin-top: .6rem; max-width: 100%; } } @media (max-width: 390px) { .ds-plate { padding: .8rem; } } @media (forced-colors: active) { .ds-paper, .ds-tinted { fill: Canvas; stroke: CanvasText; } .ds-diagram path { stroke: CanvasText; } .ds-diagram text { fill: CanvasText; } }"
+    },
+    {
+      "name": "Illustrative model panel",
+      "kind": "card",
+      "refersTo": "mini-lab",
+      "description": "The static, non-calculating state of the active-space model from src\\components\\MiniLab.astro, preserving its assumption notice and disabled update action.",
+      "html": "<section class=\"ds-lab\" aria-labelledby=\"ds-lab-title\"><div class=\"ds-learning-heading\"><h3 id=\"ds-lab-title\">Explore an active space</h3><span class=\"ds-supplement-label\">Interactive model</span></div><p class=\"ds-model-notice\"><strong>Illustrative model, not a scientific calculation.</strong> Counts only: M spatial orbitals give 2M spin modes and 2M qubits under an untapered direct occupation mapping. Fixed N alpha minus N beta is a spin projection, not proof of a total-spin eigenstate. No basis-quality or energy calculation is performed.</p><form class=\"ds-lab-form\" novalidate><div class=\"ds-lab-controls\"><label for=\"ds-lab-orbitals\">Spatial orbitals<input id=\"ds-lab-orbitals\" name=\"orbitals\" type=\"number\" min=\"1\" max=\"64\" step=\"1\" value=\"4\" required /></label><label for=\"ds-lab-electrons\">Active electrons<input id=\"ds-lab-electrons\" name=\"electrons\" type=\"number\" min=\"0\" max=\"128\" step=\"1\" value=\"4\" required /></label><label for=\"ds-lab-spin\">N alpha minus N beta<input id=\"ds-lab-spin\" name=\"spin\" type=\"number\" min=\"-128\" max=\"128\" step=\"1\" value=\"0\" required /></label></div><button class=\"ds-lab-update\" type=\"submit\" disabled>Update model</button><p class=\"ds-lab-error\" role=\"alert\" hidden></p></form><div class=\"ds-lab-results\" aria-live=\"polite\" aria-atomic=\"true\"><p>Enable JavaScript to explore this model. The assumptions and original lesson remain readable without it.</p></div></section>",
+      "css": ".ds-lab { margin-top: 1.5rem; border: 1px solid var(--line); padding: 1.5rem; background: var(--ground); color: var(--ink); font-family: var(--ui); font-size: 1rem; line-height: 1.5; } .ds-learning-heading { display: flex; gap: 1rem; flex-wrap: wrap; align-items: baseline; justify-content: space-between; } .ds-lab h3 { margin: 0; font-size: 1.4rem; font-weight: 650; line-height: 1.2; text-wrap: balance; } .ds-supplement-label { font-size: .8rem; color: var(--muted); } .ds-model-notice { color: var(--muted); font-size: .86rem; line-height: 1.6; margin: 1rem 0 1.35rem; } .ds-model-notice strong { color: var(--ink); } .ds-lab-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 1rem; } .ds-lab-controls > label { display: flex; flex-direction: column; gap: .4rem; font-size: .87rem; font-weight: 600; } .ds-lab-controls input { font: inherit; width: 100%; min-width: 0; min-height: 44px; color: var(--ink); background: var(--page); border: 1px solid var(--line); border-radius: 4px; padding: .5rem .65rem; } .ds-lab-update { margin-top: 1rem; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; min-height: 45px; padding: .65rem 1.15rem; background: transparent; color: var(--accent); border: 1px solid var(--line); border-radius: 4px; font-family: var(--ui); font-size: 1rem; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color 150ms ease-out; } .ds-lab-update:hover { background: var(--tint); border-color: var(--accent); } .ds-lab-update:disabled { cursor: not-allowed; opacity: .65; } .ds-lab-update:focus-visible, .ds-lab-controls input:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-lab-error { color: var(--warning); background: var(--warning-ground); padding: .8rem; margin-top: .8rem; } .ds-lab-results { margin-top: 1.5rem; padding-top: 1.1rem; border-top: 1px solid var(--line); } .ds-lab-results p { margin: 0; } @media (max-width: 760px) { .ds-lab { padding: 1.1rem; } .ds-lab h3 { font-size: 1.25rem; } .ds-lab-controls { grid-template-columns: 1fr 1fr; gap: .8rem; } .ds-lab-controls label { font-size: .82rem; } } @media (max-width: 390px) { .ds-lab { padding: .8rem; } .ds-lab-controls { grid-template-columns: 1fr; } } @media (prefers-reduced-motion: reduce) { .ds-lab-update { transition-duration: .01ms !important; } } @media (prefers-contrast: more) { .ds-lab-update, .ds-lab-controls input { border-width: 2px; } }"
+    },
+    {
+      "name": "Knowledge-check choice",
+      "kind": "input",
+      "refersTo": "answer-option",
+      "description": "Native radio selection within the source answer-row treatment. The specimen is ungraded; correctness and revisit feedback are separate supplied states.",
+      "html": "<label class=\"ds-answer-option\" for=\"ds-answer\"><input id=\"ds-answer\" type=\"radio\" name=\"ds-answer-choice\" value=\"1\" />Answer option</label>",
+      "css": ".ds-answer-option { display: flex; align-items: flex-start; gap: .7rem; border: 1px solid var(--line); border-radius: 4px; padding: .8rem .9rem; cursor: pointer; color: var(--ink); font-family: var(--ui); font-size: .96rem; line-height: 1.5; } .ds-answer-option:hover { background: var(--ground); } .ds-answer-option:has(input:checked) { border-color: var(--accent); background: var(--tint); } .ds-answer-option input { margin: .14rem 0 0; min-height: auto; accent-color: var(--accent); width: 1.15rem; height: 1.15rem; flex: 0 0 auto; } .ds-answer-option input:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-answer-feedback { padding: 1rem; margin-top: .8rem; font-size: .94rem; border: 1px solid var(--line); line-height: 1.6; } .ds-answer-correct .ds-answer-feedback { background: var(--good-ground); color: var(--good); border-color: var(--good); } .ds-answer-revisit .ds-answer-feedback { background: var(--warning-ground); color: var(--warning); border-color: var(--warning); } @media (max-width: 760px) { .ds-answer-option { padding: .75rem; font-size: .93rem; } } @media (prefers-contrast: more) { .ds-answer-option { border-width: 2px; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Scientific Atlas",
+    "overview": "Cool paper, cobalt linework, and ink-blue type give technical material a calm, precise setting. Locally packaged sans and serif families distinguish orientation from sustained reading. Numbered vector plates explain relationships; native controls invite inspection without competing with the lesson.\n\nThin rules and restrained tonal differences organize the interface instead of stacks of elevated cards. Original source text and supplementary learning have visible labels and separate typographic treatments. This records the implemented, user-approved world, not a proposed redesign.",
+    "keyCharacteristics": [
+      "Cool paper surfaces with role-specific light and dark palettes.",
+      "Sans-serif orientation around a generous serif reading column.",
+      "Numbered vector plates with captions, keys, and contained horizontal scrolling.",
+      "Flat, ruled panels and native controls with explicit states.",
+      "Persistent wide-screen navigation that becomes dialogs on narrower screens."
+    ],
+    "rules": [
+      {
+        "name": "The Color Carries a Role Rule",
+        "body": "Keep navigation and explanatory structure in the accent family; reserve good and warning pairs for labeled states, and focus for keyboard position.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Reading Voices Rule",
+        "body": "Use sans-serif for navigation, headings, labels, and tables; serif for original narrative; monospace for code and symbolic data. Do not style supplemental model text as if it were original source prose.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Reading, Floating Utilities Rule",
+        "body": "Keep lesson content, plates, and models flat and ruled. Use the existing shadow vocabulary for dialogs and storage notices, not for hover-lifting reading surfaces.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the complete light or dark role palette consistently across text, controls, and diagrams.",
+      "Do preserve the serif reading measure and sans-serif orientation hierarchy.",
+      "Do keep original lessons, concept explanations, and supplementary models visibly distinguished.",
+      "Do keep wide technical artifacts in labeled, keyboard-focusable scroll regions.",
+      "Do retain native controls, visible focus, explicit disabled/error states, and textual check feedback.",
+      "Do use rules and paper tones for content grouping, reserving shadows for floating utilities."
+    ],
+    "donts": [
+      "Don't interchange navigation cobalt, comparison plum, confirmation green, and revisit amber.",
+      "Don't turn generated sidecar swatch ramps into new application palette tokens.",
+      "Don't make one-off opener widths or SVG coordinates into global spacing or typography rules.",
+      "Don't replace captions, source labels, or model assumptions with decorative color alone.",
+      "Don't collapse reading completion, answer selection, and correctness into one visual state."
+    ]
+  }
+}

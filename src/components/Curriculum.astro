@@ -1,0 +1,17 @@
+---
+import { course, domains, lessonUrl } from '../lib/course';
+interface Props { current?: number; compact?: boolean }
+const { current, compact = true } = Astro.props;
+---
+<nav aria-label="Course curriculum" class:list={['curriculum', { compact }]}>
+  {domains.map((domain, index) => <section aria-label={domain.title}>
+    <h2><span>{String(index + 1).padStart(2, '0')}</span>{domain.title}</h2>
+    <ol>
+      {course.lessons.filter(lesson => lesson.number >= domain.range[0] && lesson.number <= domain.range[1]).map(lesson => <li>
+        <a href={lessonUrl(lesson.number)} aria-current={current === lesson.number ? 'page' : undefined} data-lesson-link={lesson.number}>
+          <span class="lesson-index">{String(lesson.number).padStart(2, '0')}</span><span>{lesson.title}</span><span class="lesson-state" aria-label="Read" hidden>✓</span>
+        </a>
+      </li>)}
+    </ol>
+  </section>)}
+</nav>

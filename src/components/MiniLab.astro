@@ -1,0 +1,79 @@
+---
+import type { LabKind } from '../data/learning';
+interface Props { kind: LabKind; context: string; number: number }
+const { kind, context, number } = Astro.props;
+const titles: Record<LabKind, string> = {
+  active: 'Explore an active space', mixing: 'Mix two configurations',
+  interference: 'Make a phase visible', shots: 'Trade shots for precision',
+  grouping: 'Group compatible Pauli terms', phase: 'Resolve a phase, find an alias',
+  budget: 'Allocate a scientific error budget', resources: 'Separate logical and physical scale',
+  handoff: 'Inspect a scientific handoff',
+};
+const assumptions: Record<LabKind, string> = {
+  active: 'Counts only: M spatial orbitals give 2M spin modes and 2M qubits under an untapered direct occupation mapping. Fixed N alpha minus N beta is a spin projection, not proof of a total-spin eigenstate. No basis-quality or energy calculation is performed.',
+  mixing: 'An exactly diagonalized real symmetric 2 by 2 matrix with diagonal entries 0 and the chosen gap, and equal off-diagonal coupling. Energies use arbitrary units. This is not HF, a molecular CI calculation, or an orbital optimizer.',
+  interference: 'One ideal qubit initialized in zero, then H, diag(1, exp(i phase)), H, and computational-basis measurement. The output is an exact probability, not sampled data. No noise or hardware is simulated.',
+  shots: 'Independent identically distributed outcomes of one Pauli observable, each +1 or -1, with the supplied true expectation. Standard error = sqrt((1 - expectation squared) / shots). This is not a confidence interval from observed data and excludes grouped covariance and device noise.',
+  grouping: 'A greedy, input-order-dependent partition into pairwise qubit-wise commuting terms. It is valid but not necessarily a minimum grouping. Globally commuting terms can require a more general measurement basis.',
+  phase: 'Convention: U = exp(+i H t), with hbar = 1 and arbitrary consistent units. This displays the nearest binary phase bin, not a sampled QPE distribution. Energy is known only modulo 2 pi / t; this does not model walk-spectrum decoding or trial-state overlap.',
+  budget: 'Each input is an illustrative, justified absolute error allowance in millihartree (mEh). Their sum is a conservative worst-case bound only if the individual bounds are valid. These are not measured uncertainties or hardware failure probabilities.',
+  resources: 'Illustration only: physical data-qubit count = logical qubits times 2 times distance squared; duration = cycles times cycle time. Odd distances model a simplified surface-code patch convention. No logical error model, magic-state factories, routing, decoding, or failure-budget calculation is included. NOT a real quantum resource estimate.',
+  handoff: 'A teaching checklist for information sufficiency, not validation of a chemistry result or a remote execution. Checking boxes does not certify that the information itself is correct.',
+};
+const prefix = `lab-${number}`;
+---
+<section class="mini-lab" data-lab data-kind={kind} aria-labelledby={`${prefix}-title`}>
+  <div class="learning-heading"><h3 id={`${prefix}-title`}>{titles[kind]}</h3><span class="supplement-label">Interactive model</span></div>
+  <p>{context}</p>
+  <p class="model-notice"><strong>Illustrative model, not a scientific calculation.</strong> {assumptions[kind]}</p>
+  <form class="lab-form" novalidate>
+    <div class="lab-controls">
+      {kind === 'active' && <>
+        <label for={`${prefix}-orbitals`}>Spatial orbitals<input id={`${prefix}-orbitals`} name="orbitals" type="number" min="1" max="64" step="1" value="4" required /></label>
+        <label for={`${prefix}-electrons`}>Active electrons<input id={`${prefix}-electrons`} name="electrons" type="number" min="0" max="128" step="1" value="4" required /></label>
+        <label for={`${prefix}-spin`}>N alpha minus N beta<input id={`${prefix}-spin`} name="spin" type="number" min="-128" max="128" step="1" value="0" required /></label>
+      </>}
+      {kind === 'mixing' && <>
+        <label for={`${prefix}-gap`}>Diagonal energy gap<input id={`${prefix}-gap`} name="gap" type="number" min="0" max="10" step="0.1" value="1" required /></label>
+        <label for={`${prefix}-coupling`}>Off-diagonal coupling<input id={`${prefix}-coupling`} name="coupling" type="number" min="-5" max="5" step="0.05" value="0.25" required /></label>
+      </>}
+      {kind === 'interference' && <label class="wide-control" for={`${prefix}-phase`}>Relative phase (radians)<input id={`${prefix}-phase`} name="phase" type="range" min="0" max="6.283185307179586" step="0.001" value="1.5707963267948966" /></label>}
+      {kind === 'shots' && <>
+        <label for={`${prefix}-expectation`}>True Pauli expectation<input id={`${prefix}-expectation`} name="expectation" type="number" min="-1" max="1" step="0.05" value="0" required /></label>
+        <label for={`${prefix}-shots`}>Independent shots<input id={`${prefix}-shots`} name="shots" type="number" min="1" max="100000000" step="1" value="1000" required /></label>
+      </>}
+      {kind === 'grouping' && <label class="wide-control" for={`${prefix}-terms`}>Equal-length Pauli strings, separated by commas<input id={`${prefix}-terms`} name="terms" type="text" value="ZI, IZ, ZZ, XX, XI" maxlength="300" spellcheck="false" required /></label>}
+      {kind === 'phase' && <>
+        <label for={`${prefix}-energy`}>Input energy<input id={`${prefix}-energy`} name="energy" type="number" min="-100" max="100" step="0.01" value="1.57" required /></label>
+        <label for={`${prefix}-time`}>Evolution time<input id={`${prefix}-time`} name="time" type="number" min="0.01" max="100" step="0.01" value="1" required /></label>
+        <label for={`${prefix}-bits`}>Phase bits<input id={`${prefix}-bits`} name="bits" type="number" min="1" max="20" step="1" value="3" required /></label>
+      </>}
+      {kind === 'budget' && <>
+        <label for={`${prefix}-model`}>Model allowance (mEh)<input id={`${prefix}-model`} name="model" type="number" min="0" max="100" step="0.01" value="0.4" required /></label>
+        <label for={`${prefix}-approximation`}>Approximation (mEh)<input id={`${prefix}-approximation`} name="approximation" type="number" min="0" max="100" step="0.01" value="0.2" required /></label>
+        <label for={`${prefix}-estimation`}>Estimation (mEh)<input id={`${prefix}-estimation`} name="estimation" type="number" min="0" max="100" step="0.01" value="0.3" required /></label>
+      </>}
+      {kind === 'resources' && <>
+        <label for={`${prefix}-logical`}>Logical data qubits<input id={`${prefix}-logical`} name="logical" type="number" min="1" max="100000" step="1" value="100" required /></label>
+        <label for={`${prefix}-distance`}>Odd code distance<input id={`${prefix}-distance`} name="distance" type="number" min="3" max="99" step="2" value="15" required /></label>
+        <label for={`${prefix}-cycles`}>Error-correction cycles<input id={`${prefix}-cycles`} name="cycles" type="number" min="1" max="1000000000" step="1" value="1000000" required /></label>
+        <label for={`${prefix}-cycleTime`}>Cycle time (microseconds)<input id={`${prefix}-cycleTime`} name="cycleTime" type="number" min="0.01" max="10000" step="0.01" value="1" required /></label>
+      </>}
+      {kind === 'handoff' && <fieldset class="handoff-options"><legend>What does this hypothetical record include?</legend>
+        <label><input type="checkbox" name="revision" /> Pinned input and source revision</label>
+        <label><input type="checkbox" name="mapping" /> Orbital, qubit, and bit ordering</label>
+        <label><input type="checkbox" name="units" /> Units and energy offsets</label>
+        <label><input type="checkbox" name="uncertainty" /> Accuracy target and uncertainty record</label>
+      </fieldset>}
+    </div>
+    <button class="button secondary lab-update" type="submit" disabled>Update model</button>
+    <p class="lab-error" role="alert" hidden></p>
+  </form>
+  <div class="lab-results" aria-live="polite" aria-atomic="true">
+    <p class="lab-start">Enable JavaScript to explore this model. The assumptions and original lesson remain readable without it.</p>
+  </div>
+</section>
+<script>
+  import { initLabs } from '../scripts/labs';
+  initLabs();
+</script>

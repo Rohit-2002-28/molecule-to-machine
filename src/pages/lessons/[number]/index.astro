@@ -1,0 +1,59 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import ConceptPlate from '../../../components/ConceptPlate.astro';
+import MiniLab from '../../../components/MiniLab.astro';
+import KnowledgeCheck from '../../../components/KnowledgeCheck.astro';
+import { BASE, course, domainFor, lessonUrl, readingMinutes, sourceUrl, type Lesson } from '../../../lib/course';
+import { renderMarkdown } from '../../../lib/markdown';
+import { learning } from '../../../data/learning';
+export function getStaticPaths() {
+  return course.lessons.map(lesson => ({ params: { number: String(lesson.number).padStart(2, '0') }, props: { lesson } }));
+}
+interface Props { lesson: Lesson }
+const { lesson } = Astro.props;
+const rendered = await renderMarkdown(lesson.body);
+const supplement = learning[lesson.number];
+if (!supplement) throw new Error(`Lesson ${lesson.number} needs its grounded learning content before building.`);
+const domain = domainFor(lesson.number);
+const previous = course.lessons.find(item => item.number === lesson.number - 1);
+const next = course.lessons.find(item => item.number === lesson.number + 1);
+const sections = rendered.sections.filter(section => section.depth === 2);
+---
+<SiteLayout title={lesson.title} description={supplement.summary} lesson={lesson.number}>
+  <progress class="reading-meter" data-reading-meter value="0" max="100" aria-label="Position in this lesson's original text"></progress>
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href={BASE}>Course</a><span aria-hidden="true">/</span><a href={`${BASE}#${domain.id}`}>{domain.title}</a><span aria-hidden="true">/</span><span>Lesson {lesson.number}</span></nav>
+  <header class="lesson-header">
+    <h1><span class="chapter-number">{String(lesson.number).padStart(2, '0')}</span>{rendered.title || lesson.title}</h1>
+    <p class="lesson-deck">{supplement.idea}</p>
+    <div class="lesson-meta"><span>~{readingMinutes(lesson.body)} min reading</span><span>{sections.length} sections</span><span>{supplement.questions.length} knowledge checks</span></div>
+    <div class="lesson-actions"><button class="button secondary" data-mark-read aria-pressed="false" disabled>Mark lesson as read</button><button class="button secondary" data-bookmark aria-pressed="false" disabled>Save lesson</button><button class="button secondary mobile-toc-button" data-open-toc aria-haspopup="dialog" disabled>On this page</button></div>
+    <p class="storage-status" data-storage-status>Progress is saved only in this browser. No account or tracking.</p>
+    <a class="text-button" data-resume-here hidden href="#">Resume at your saved section</a>
+  </header>
+  <ConceptPlate number={lesson.number} plate={supplement.plate} />
+  <div class="original-label"><strong>Original technical lesson</strong><a href={`${lessonUrl(lesson.number)}source.md`} download>Download original Markdown</a><a href="#learning">Jump to the interactive model</a></div>
+  <article class="lesson-body" aria-label="Complete original lesson" set:html={rendered.html}></article>
+  <section class="learning-section" id="learning" aria-labelledby="learning-title">
+    <div class="learning-heading"><h2 id="learning-title">Make the idea your own</h2><span class="supplement-label">Supplementary learning</span></div>
+    <p>The original lesson above is preserved in full. The model and questions below are added learning aids, not newly executed chemistry results.</p>
+    <MiniLab kind={supplement.lab} context={supplement.labContext} number={lesson.number} />
+    <aside class="team-handoff" aria-labelledby="handoff-title"><h3 id="handoff-title">What crosses the team boundary?</h3><dl><dt>Next consumer</dt><dd>{supplement.handoff.recipient}</dd><dt>Useful handoff</dt><dd>{supplement.handoff.artifact}</dd><dt>Keep distinct</dt><dd>{supplement.handoff.boundary}</dd></dl></aside>
+  </section>
+  <KnowledgeCheck number={lesson.number} questions={supplement.questions} />
+  <details class="source-details" id="sources">
+    <summary>Source notes &amp; references ({lesson.sources.length})</summary>
+    <p>{lesson.caveats}</p>
+    <p>Public source: <a href={`https://github.com/${course.sourceRepository}/tree/${course.sourceRevision}`}>{course.sourceRepository}</a>, pinned to <code>{course.sourceRevision.slice(0, 12)}</code>. This course describes that revision, not every later release.</p>
+    <ul class="source-list">{lesson.sources.map(path => <li><a href={sourceUrl(path)}>{path}</a></li>)}</ul>
+  </details>
+  <div class="lesson-actions"><button class="button" data-mark-read aria-pressed="false" disabled>Mark lesson as read</button><a class="button secondary" href={`${BASE}glossary/`}>Look up a term</a></div>
+  <nav class="lesson-pagination" aria-label="Lesson pagination">
+    {previous ? <a href={lessonUrl(previous.number)}><span>← Previous · Lesson {previous.number}</span><strong>{previous.title}</strong></a> : <a href={BASE}><span>← The full course</span><strong>Return to the journey</strong></a>}
+    {next ? <a href={lessonUrl(next.number)}><span>Next · Lesson {next.number} →</span><strong>{next.title}</strong></a> : <a href={`${BASE}saved/`}><span>Your next step →</span><strong>Review saved lessons</strong></a>}
+  </nav>
+  <aside slot="toc" class="section-toc" aria-label="On this page">
+    <h2>On this page</h2><ol>{sections.map(section => <li><a href={`#${section.id}`}>{section.title}</a></li>)}</ol>
+    <div class="toc-utilities"><a href="#learning">Interactive model</a><a href="#knowledge-check">Knowledge check</a><a href="#sources">Source notes</a><a href={`${BASE}glossary/`}>Glossary</a><button class="print-button" data-print>Print this lesson</button></div>
+  </aside>
+  <dialog class="toc-dialog" aria-labelledby="mobile-toc-title"><div class="dialog-heading"><h2 id="mobile-toc-title">On this page</h2><button class="icon-button" data-close-dialog aria-label="Close section navigation">×</button></div><ol>{sections.map(section => <li><a href={`#${section.id}`}>{section.title}</a></li>)}<li><a href="#learning">Interactive model</a></li><li><a href="#knowledge-check">Knowledge check</a></li><li><a href="#sources">Source notes</a></li></ol></dialog>
+</SiteLayout>

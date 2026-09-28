@@ -1,0 +1,7 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { BASE } from '../lib/course';
+---
+<SiteLayout title="Page not found" wide>
+  <div class="simple-page"><h1>This page is not in the course.</h1><p class="intro">The link may be incomplete or refer to an older route. Every published chapter is reachable from the curriculum.</p><div class="home-actions"><a class="button" href={BASE}>Open the course index</a><a href={`${BASE}glossary/`}>Look up a term</a></div></div>
+</SiteLayout>

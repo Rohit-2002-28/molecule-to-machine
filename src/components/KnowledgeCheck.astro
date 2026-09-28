@@ -1,0 +1,20 @@
+---
+import type { Question } from '../data/learning';
+interface Props { number: number; questions: Question[] }
+const { number, questions } = Astro.props;
+---
+<section class="knowledge-check" id="knowledge-check" aria-labelledby="check-title" data-quiz data-lesson={number}>
+  <div class="learning-heading"><h2 id="check-title">Check your understanding</h2><span class="supplement-label">Supplementary learning</span></div>
+  <p>Reason through these {questions.length} questions. Your answers do not mark the lesson as read, and nothing is locked.</p>
+  <form>
+    {questions.map((question, index) => <fieldset data-question data-correct={question.correct}>
+      <legend><span class="question-number">{index + 1}.</span> {question.prompt}</legend>
+      <div class="answer-options">{question.choices.map((choice, choiceIndex) => <label class="answer-option">
+        <input type="radio" name={`question-${index}`} value={choiceIndex} required /><span>{choice}</span>
+      </label>)}</div>
+      <p class="answer-feedback" hidden data-explanation={question.explanation}></p>
+    </fieldset>)}
+    <div class="check-actions"><button class="button" type="submit" disabled>Check answers</button><button class="button secondary" type="reset" disabled>Reset this check</button></div>
+    <p class="quiz-status" role="status" aria-live="polite">Enable JavaScript to check and save answers locally.</p>
+  </form>
+</section>
