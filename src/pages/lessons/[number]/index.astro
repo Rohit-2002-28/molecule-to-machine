@@ -3,9 +3,12 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import ConceptPlate from '../../../components/ConceptPlate.astro';
 import MiniLab from '../../../components/MiniLab.astro';
 import KnowledgeCheck from '../../../components/KnowledgeCheck.astro';
+import InlineFigure from '../../../components/InlineFigure.astro';
 import { BASE, course, domainFor, lessonUrl, readingMinutes, sourceUrl, type Lesson } from '../../../lib/course';
 import { renderMarkdown } from '../../../lib/markdown';
 import { learning } from '../../../data/learning';
+import { figuresForLesson } from '../../../data/inline-figures';
+import { interleaveFigures } from '../../../lib/inline-placement';
 export function getStaticPaths() {
   return course.lessons.map(lesson => ({ params: { number: String(lesson.number).padStart(2, '0') }, props: { lesson } }));
 }
@@ -18,6 +21,8 @@ const domain = domainFor(lesson.number);
 const previous = course.lessons.find(item => item.number === lesson.number - 1);
 const next = course.lessons.find(item => item.number === lesson.number + 1);
 const sections = rendered.sections.filter(section => section.depth === 2);
+const inlineFigures = figuresForLesson(lesson.number);
+const chunks = interleaveFigures(rendered.blocks, inlineFigures);
 ---
 <SiteLayout title={lesson.title} description={supplement.summary} lesson={lesson.number}>
   <progress class="reading-meter" data-reading-meter value="0" max="100" aria-label="Position in this lesson's original text"></progress>
@@ -31,11 +36,11 @@ const sections = rendered.sections.filter(section => section.depth === 2);
     <a class="text-button" data-resume-here hidden href="#">Resume at your saved section</a>
   </header>
   <ConceptPlate number={lesson.number} plate={supplement.plate} />
-  <div class="original-label"><strong>Original technical lesson</strong><a href={`${lessonUrl(lesson.number)}source.md`} download>Download original Markdown</a><a href="#learning">Jump to the interactive model</a></div>
-  <article class="lesson-body" aria-label="Complete original lesson" set:html={rendered.html}></article>
+  <div class="original-label"><strong>Original technical lesson · {inlineFigures.length} contextual {inlineFigures.length === 1 ? 'figure' : 'figures'} added</strong><a href={`${lessonUrl(lesson.number)}source.md`} download>Download original Markdown</a><a href="#learning">Jump to the interactive model</a></div>
+  <article class="lesson-body" aria-label="Complete original lesson">{chunks.map(chunk => chunk.kind === 'html' ? <Fragment set:html={chunk.html} /> : <InlineFigure figure={chunk.figure} />)}</article>
   <section class="learning-section" id="learning" aria-labelledby="learning-title">
     <div class="learning-heading"><h2 id="learning-title">Make the idea your own</h2><span class="supplement-label">Supplementary learning</span></div>
-    <p>The original lesson above is preserved in full. The model and questions below are added learning aids, not newly executed chemistry results.</p>
+    <p>The original lesson above is preserved in full, with labeled supplemental figures placed beside the relevant explanations. The model and questions below are also learning aids, not newly executed chemistry results.</p>
     <MiniLab kind={supplement.lab} context={supplement.labContext} number={lesson.number} />
     <aside class="team-handoff" aria-labelledby="handoff-title"><h3 id="handoff-title">What crosses the team boundary?</h3><dl><dt>Next consumer</dt><dd>{supplement.handoff.recipient}</dd><dt>Useful handoff</dt><dd>{supplement.handoff.artifact}</dd><dt>Keep distinct</dt><dd>{supplement.handoff.boundary}</dd></dl></aside>
   </section>
@@ -56,4 +61,8 @@ const sections = rendered.sections.filter(section => section.depth === 2);
     <div class="toc-utilities"><a href="#learning">Interactive model</a><a href="#knowledge-check">Knowledge check</a><a href="#sources">Source notes</a><a href={`${BASE}glossary/`}>Glossary</a><button class="print-button" data-print>Print this lesson</button></div>
   </aside>
   <dialog class="toc-dialog" aria-labelledby="mobile-toc-title"><div class="dialog-heading"><h2 id="mobile-toc-title">On this page</h2><button class="icon-button" data-close-dialog aria-label="Close section navigation">×</button></div><ol>{sections.map(section => <li><a href={`#${section.id}`}>{section.title}</a></li>)}<li><a href="#learning">Interactive model</a></li><li><a href="#knowledge-check">Knowledge check</a></li><li><a href="#sources">Source notes</a></li></ol></dialog>
+  <script>
+    import { initInlineFigures } from '../../../scripts/inline-figures';
+    initInlineFigures();
+  </script>
 </SiteLayout>

@@ -1,4 +1,4 @@
-import sourceCourse from '../content/course.json';
+import sourceCourse from '../content/course.json' with { type: 'json' };
 
 export const EXPECTED_LESSONS = 34;
 export const SOURCE_REVISION = '97a3ff4fb86ebd5a2516e3548cece69127fd3555';

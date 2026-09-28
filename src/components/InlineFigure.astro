@@ -1,0 +1,55 @@
+---
+import type { InlineFigure as Figure } from '../data/inline-figures';
+import { plotFor, representativeRows } from '../lib/plot-data';
+import FigureChart from './FigureChart.astro';
+import InlineDiagram from './InlineDiagram.astro';
+import { classifyCandidates, resourceCandidates } from '../lib/visual-models';
+import '../styles/inline-figures.css';
+interface Props { figure: Figure }
+const { figure } = Astro.props;
+const id = `figure-${figure.id}`;
+const spec = figure.plot ? plotFor(figure.plot) : null;
+const rows = spec ? representativeRows(spec) : [];
+const format = (value: number) => value === 0 ? '0' : Math.abs(value) < .0001 || Math.abs(value) >= 1e7 ? value.toExponential(4) : Number(value.toPrecision(6)).toLocaleString('en-US', { maximumFractionDigits: 6 });
+const feasible = classifyCandidates(resourceCandidates, 600000, 2.5);
+---
+<figure class="inline-figure" id={id} data-inline-figure={figure.id} data-section-anchor={figure.anchor} data-after-paragraph={figure.afterParagraph} data-interaction={figure.interaction} data-plot-kind={figure.plot} aria-labelledby={`${id}-title`}>
+  <figcaption class="inline-figure-heading" id={`${id}-title`}><strong>{figure.title}</strong><a class="figure-permalink" href={`#${id}`} aria-label={`Link to figure: ${figure.title}`}>#</a></figcaption>
+  <p class="figure-provenance" data-provenance={figure.provenance}>Supplementary · {figure.provenance}</p>
+  {spec && <div class="plot-layout">
+    <div class="plot-y-label">{spec.y.label}</div>
+    <FigureChart spec={spec} id={id} title={figure.title} compact={false} />
+    <FigureChart spec={spec} id={id} title={figure.title} compact={true} />
+    <div class="plot-x-label">{spec.x.label}</div>
+    <ul class="plot-legend" aria-label="Plot legend">{spec.series.map(item => <li><span class:list={['legend-swatch', `series-${item.tone}`, { 'legend-dashed': item.dashed, 'legend-dot': item.mode === 'points' }]} aria-hidden="true"></span>{item.name}</li>)}</ul>
+    {spec.reference && <p class="plot-reference-label">{spec.reference.map(reference => <span data-reference-label={reference.axis}>Dotted reference: {reference.label}. </span>)}</p>}
+  </div>}
+  {figure.diagram && <InlineDiagram kind={figure.diagram} />}
+  {figure.interaction && <div class="figure-explorer">
+    <fieldset disabled>
+      <legend>{figure.interaction === 'separation' ? 'Choose one fixed geometry' : figure.interaction === 'shots' ? 'Choose a measurement budget' : figure.interaction === 'qpe-bits' ? 'Choose the phase grid' : 'Apply hypothetical resource limits'}</legend>
+      {figure.interaction === 'separation' && <label for={`${id}-separation`}>Normalized separation x<input id={`${id}-separation`} name="separation" type="range" min="0.6" max="4" step="0.01" value="1.35" /></label>}
+      {figure.interaction === 'shots' && <label for={`${id}-shots`}>Independent shots N<input id={`${id}-shots`} name="shots" type="range" min="25" max="1600" step="25" value="100" /></label>}
+      {figure.interaction === 'qpe-bits' && <><label for={`${id}-bits`}>Readout bits m</label><select id={`${id}-bits`} name="bits"><option value="2">2 bits · 4 bins</option><option value="3" selected>3 bits · 8 bins</option><option value="4">4 bits · 16 bins</option><option value="5">5 bits · 32 bins</option></select></>}
+      {figure.interaction === 'pareto' && <div class="figure-budget-controls"><label for={`${id}-qubits`}>Qubit ceiling<input id={`${id}-qubits`} name="qubits" type="number" min="100000" max="900000" step="100000" value="600000" /></label><label for={`${id}-deadline`}>Deadline (hours)<input id={`${id}-deadline`} name="deadline" type="number" min="0.5" max="6" step="0.5" value="2.5" /></label></div>}
+    </fieldset>
+    <p class="figure-selection" data-figure-readout aria-live="polite" aria-atomic="true">
+      {figure.interaction === 'separation' && 'Selected x = 1.35 · E/Dₑ = −0.746574 · slope = 0.999953 · normalized force = −0.999953.'}
+      {figure.interaction === 'shots' && 'Selected N = 100 · standard error = 0.1. At 400 shots it becomes 0.05.'}
+      {figure.interaction === 'qpe-bits' && '3 bits · 8 bins · spacing 0.125 turns · probabilities sum to 1.'}
+      {figure.interaction === 'pareto' && `Fits both limits: ${feasible.filter(point => point.feasible).map(point => point.name).join(', ')}. C remains dominated by A.`}
+    </p>
+    <p class="figure-input-error" role="alert" hidden></p>
+    <noscript><p class="figure-static-note">The complete static plot and values are available above and below. JavaScript enables only the optional controls.</p></noscript>
+  </div>}
+  <p class="figure-assumptions"><strong>Model and source.</strong> {figure.assumptions}</p>
+  <p class="figure-takeaway"><strong>How to read this.</strong> {figure.takeaway}</p>
+  {spec && <details class="figure-data"><summary>Inspect plotted values</summary><p>Selected coordinates from the declared analytical or teaching data. Continuous curves are sampled for drawing; discrete outcomes remain discrete.</p>
+    <div class="figure-table-scroll" tabindex="0" role="region" aria-label={`Numerical values for ${figure.title}`}><table>
+      <caption>{figure.title}: plotted values</caption>
+      <thead><tr><th scope="col">Series</th><th scope="col">x</th><th scope="col">y</th></tr></thead>
+      <tbody data-figure-values>{rows.map(row => <tr><th scope="row">{row.series}</th><td>{format(row.x)}</td><td>{format(row.y)}</td></tr>)}</tbody>
+    </table></div>
+  </details>}
+  <a class="figure-context-link" href={`#${figure.anchor}`}>Return to this explanation</a>
+</figure>

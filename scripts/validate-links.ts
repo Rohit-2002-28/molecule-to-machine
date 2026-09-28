@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 import { BASE, course, lessonUrl } from '../src/lib/course';
+import { figuresForLesson } from '../src/data/inline-figures';
 
 const root = resolve('dist');
 const origin = 'https://rohit-2002-28.github.io';
@@ -64,6 +65,17 @@ for (const lesson of course.lessons) {
     const html = content(htmlPath);
     for (const required of ['data-quiz', 'data-lab', 'concept-plate', 'Complete original lesson', 'THESIS:']) {
       if (!html.includes(required)) failures.add(`Lesson ${lesson.number}: missing ${required}.`);
+    }
+    for (const figure of figuresForLesson(lesson.number)) {
+      const token = `data-inline-figure="${figure.id}"`;
+      if (html.split(token).length - 1 !== 1 || !html.includes(`data-section-anchor="${figure.anchor}"`)) {
+        failures.add(`Lesson ${lesson.number}: contextual figure ${figure.id} is missing, duplicated, or misanchored.`);
+      }
+    }
+    const ids = [...html.matchAll(/\bid="([^"]+)"/gu)].map(match => match[1]);
+    if (new Set(ids).size !== ids.length) failures.add(`Lesson ${lesson.number}: duplicate HTML ids.`);
+    for (const reference of html.matchAll(/\baria-labelledby="([^"]+)"/gu)) {
+      for (const id of reference[1]!.split(/\s+/u)) if (!ids.includes(id)) failures.add(`Lesson ${lesson.number}: missing aria-labelledby destination ${id}.`);
     }
   }
 }

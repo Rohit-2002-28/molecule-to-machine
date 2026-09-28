@@ -12,7 +12,8 @@ import type { Root, Element, RootContent } from 'hast';
 import type { Plugin } from 'unified';
 
 export interface Section { id: string; title: string; depth: number; text: string }
-export interface RenderedLesson { html: string; title: string; sections: Section[]; plainText: string; mathErrors: string[] }
+export interface HtmlBlock { html: string; tag: string | null; id: string | null }
+export interface RenderedLesson { html: string; title: string; sections: Section[]; plainText: string; mathErrors: string[]; blocks: HtmlBlock[] }
 
 function plain(node: Root | RootContent | MdRoot | MdContent): string {
   if ('value' in node) return node.value;
@@ -65,6 +66,7 @@ async function render(markdown: string): Promise<RenderedLesson> {
   let title = '';
   let plainText = '';
   const sections: Section[] = [];
+  const blocks: HtmlBlock[] = [];
   const extractTitle: Plugin<[], MdRoot> = () => tree => {
     const first = tree.children[0];
     if (first?.type === 'heading' && first.depth === 1) {
@@ -129,6 +131,16 @@ async function render(markdown: string): Promise<RenderedLesson> {
       return SKIP;
     });
   };
+  const captureBlocks: Plugin<[], Root> = () => tree => {
+    const serializer = unified().use(rehypeStringify);
+    for (const node of tree.children) {
+      blocks.push({
+        html: serializer.stringify({ type: 'root', children: [node] }),
+        tag: node.type === 'element' ? node.tagName : null,
+        id: node.type === 'element' && typeof node.properties.id === 'string' ? node.properties.id : null,
+      });
+    }
+  };
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -146,10 +158,11 @@ async function render(markdown: string): Promise<RenderedLesson> {
     .use(literalTextArguments)
     .use(rehypeKatex, { trust: false, strict: 'ignore', maxExpand: 1000 })
     .use(scrollableContent)
+    .use(captureBlocks)
     .use(rehypeStringify)
     .process(normalizeMath(markdown));
   const mathErrors = file.messages.filter(message =>
     message.source === 'rehype-katex' && message.ruleId === 'parseerror').map(message =>
       `${message.message}${message.cause instanceof Error ? `: ${message.cause.message}` : ''}`);
-  return { html: String(file), title, sections, plainText, mathErrors };
+  return { html: String(file), title, sections, plainText, mathErrors, blocks };
 }

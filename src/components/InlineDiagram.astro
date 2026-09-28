@@ -1,0 +1,102 @@
+---
+import type { DiagramKind } from '../data/inline-figures';
+import { excitationDistance } from '../lib/visual-models';
+interface Props { kind: DiagramKind }
+const { kind } = Astro.props;
+const determinants = ['111000', '110100', '100110', '000111'];
+---
+<div class:list={['inline-diagram', `diagram-${kind}`]}>
+  {kind === 'representation' && <ol class="representation-stack">
+    <li><strong>Basis functions</strong><span>χ₁, χ₂, … : the one-electron vocabulary</span><p>Orbital coefficients Cμp combine these functions.</p></li>
+    <li><strong>Molecular orbitals</strong><span>φp = Σμ Cμp χμ</span><p>Add spin, choose occupations, and antisymmetrize.</p></li>
+    <li><strong>Many-electron state</strong><span>Ψ = ΣI cI DI</span><p>CI amplitudes cI combine determinants, not basis functions.</p></li>
+  </ol>}
+  {kind === 'decisions' && <dl class="decision-grid">
+    <div><dt>Physical approximation</dt><dd>Hartree–Fock<p>What class of many-electron state?</p></dd></div>
+    <div><dt>Representation</dt><dd>cc-pVDZ<p>What finite orbital vocabulary?</p></dd></div>
+    <div><dt>Numerical strategy</dt><dd>DIIS / GDM<p>How do we seek stationarity?</p></dd></div>
+    <div><dt>Implementation</dt><dd>qdk / pyscf<p>Which supported software carries it out?</p></dd></div>
+  </dl>}
+  {kind === 'rotation' && <>
+    <svg class="compact-diagram" viewBox="0 0 340 260" role="img" aria-label="Two perpendicular original axes u and v, and two perpendicular rotated axes u prime and v prime. Both pairs span the same plane.">
+      <circle class="diagram-guide" cx="170" cy="130" r="92" />
+      <path class="diagram-primary" d="M170 230V25 M165 34L170 25L175 34 M70 130H278 M270 125L278 130L270 135" />
+      <path class="diagram-comparison" d="M95 205L245 55 M235 58L245 55L242 65 M245 205L95 55 M99 65L95 55L105 59" />
+      <text x="290" y="136">u</text><text x="177" y="25">v</text><text x="251" y="52">u′</text><text x="69" y="52">v′</text>
+      <path class="diagram-guide" d="M210 130A40 40 0 0 0 198 102" /><text x="215" y="113">π/4</text>
+    </svg>
+    <div class="diagram-equations"><span>u′ = (u + v)/√2</span><span>v′ = (−u + v)/√2</span></div>
+  </>}
+  {kind === 'connectivity' && <>
+    <div class="figure-table-scroll" tabindex="0" role="region" aria-label="Determinant coupling permission table">
+      <table class="diagram-matrix"><caption>Allowed by excitation distance, not actual matrix values</caption><thead><tr><th scope="col">Pair</th>{determinants.map((_, index) => <th scope="col">D{index + 1}</th>)}</tr></thead><tbody>
+        {determinants.map((first, row) => <tr><th scope="row">D{row + 1}</th>{determinants.map(second => {
+          const distance = excitationDistance(first, second);
+          return <td class:list={{ 'matrix-zero': distance > 2 }}><span aria-label={distance > 2 ? 'Required zero' : 'Permitted by excitation distance'}>{distance > 2 ? '0' : '●'}</span></td>;
+        })}</tr>)}
+      </tbody></table>
+    </div>
+    <ul class="determinant-key">{determinants.map((value, index) => <li>D{index + 1}: <span>{value}</span></li>)}</ul>
+    <p class="diagram-note">● means a coupling is permitted, not guaranteed. 0 means a structural zero.</p>
+  </>}
+  {kind === 'active-partition' && <>
+    <div class="orbital-strip" aria-label="28 spatial orbital slots: four inactive, six active, eighteen excluded">{Array.from({ length: 28 }, (_, index) => <span aria-hidden="true" class={index < 4 ? 'slot-inactive' : index < 10 ? 'slot-active' : 'slot-excluded'}></span>)}</div>
+    <dl class="partition-ledger"><div><dt>4 inactive orbitals</dt><dd>8 fixed electrons</dd></div><div><dt>6 active orbitals</dt><dd>6 variable electrons</dd></div><div><dt>18 excluded orbitals</dt><dd>0 active electrons</dd></div></dl>
+    <p class="diagram-note">Spatial orbitals: 4 + 6 + 18 = 28. Electrons: 8 + 6 = 14.</p>
+  </>}
+  {kind === 'mcscf' && <div class="nested-cycle">
+    <p class="process-label">Macroiteration: refresh the coupled problem</p>
+    <ol class="process-steps"><li><strong>Orbitals → integrals</strong><span>A new orbital basis changes matrix elements.</span></li><li><strong>CI solve → densities</strong><span>Optimize coefficients for those integrals.</span></li></ol>
+    <div class="micro-cycle"><strong>Inner orbital microiterations</strong><p>Use local gradients and curvature to propose cheaper rotations.</p></div>
+    <p class="feedback-arrow">↺ Refresh the integrals and correlated state before trusting the next macro step.</p>
+  </div>}
+  {kind === 'fermion-sign' && <>
+    <table class="mode-table"><caption>Apply a₂ to occupations in increasing mode order</caption><thead><tr><th scope="col">Mode</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th></tr></thead>
+      <tbody><tr><th scope="row">Before</th><td>1</td><td>0</td><td class="target-mode">1</td><td>0</td></tr><tr><th scope="row">Z prefix</th><td>−1</td><td>+1</td><td>target</td><td>later</td></tr><tr><th scope="row">After</th><td>1</td><td>0</td><td class="target-mode">0</td><td>0</td></tr></tbody>
+    </table>
+    <p class="diagram-equations">a₂ |1,0,1,0⟩ = −|1,0,0,0⟩</p>
+    <p class="diagram-note">Prefix product: (−1) × (+1) = −1. One electron was removed; the order convention stays fixed.</p>
+  </>}
+  {kind === 'conversions' && <dl class="conversion-routes">
+    <div><dt>Request QIR</dt><dd><ol><li>Return stored QIR, if present.</li><li>Otherwise compile the owning Q# factory.</li><li>Otherwise compile QASM with the stated Base profile.</li></ol></dd></div>
+    <div><dt>Request QASM</dt><dd><ol><li>Return stored QASM, if present.</li><li>Otherwise supported QIR/factory → Qiskit conversion → OpenQASM 3 export.</li></ol><p>Optional conversion dependencies are required.</p></dd></div>
+    <div><dt>Request circuit view</dt><dd>Stored native view, owning factory, or supported QASM converter.<p><strong>No direct QIR-only branch.</strong></p></dd></div>
+  </dl>}
+  {kind === 'fresh-qpe' && <div class="qpe-comparison">
+    <div><strong>One coherent standard-QPE shot</strong><ol class="step-rail"><li>Prepare one system</li><li>All controlled powers</li><li>Inverse QFT</li><li>Read a complete phase word</li></ol><p>The phase register and the same system remain a joint coherent state.</p></div>
+    <div><strong>Fresh-system-per-bit implementation</strong><ol class="step-rail"><li>Prepare system</li><li>Measure one bit</li><li>Reset / prepare again</li><li>Next bit with classical feedback</li></ol><p>Different preparations can carry different eigencomponents of a trial superposition.</p></div>
+  </div>}
+  {kind === 'lattice' && <svg class="compact-diagram" viewBox="0 0 340 270" role="img" aria-label="An open six-site chain has five links. A periodic six-site chain adds a dashed wrap link from site five to site zero.">
+    <text x="18" y="27">Open chain: 5 links</text><path class="diagram-primary" d="M35 67H305" />
+    <text x="18" y="143">Periodic chain: 6 links</text><path class="diagram-primary" d="M35 181H305" /><path class="diagram-comparison" d="M35 181C35 244 305 244 305 181" />
+    {[67, 181].map(y => Array.from({ length: 6 }, (_, index) => <g><circle class="lattice-node" cx={35 + index * 54} cy={y} r="16" /><text x={35 + index * 54} y={y + 6} text-anchor="middle">{index}</text></g>))}
+    <text x="170" y="258" text-anchor="middle">Added wrap bond (5,0)</text>
+  </svg>}
+  {kind === 'artifacts' && <div class="artifact-map">
+    <div class="manifest-node"><strong>Transport manifest</strong><span>Typed identities and references</span></div>
+    <div class="artifact-branches"><div><strong>Inline JSON</strong><span>Primitive numbers, booleans, strings, null</span></div><div><strong>HDF5 artifacts</strong><span>Supported QDK data objects</span></div><div><strong>NumPy payloads</strong><span>Supported arrays, without object/pickle loading</span></div></div>
+    <p class="diagram-note">Supported lists and tuples can nest these values. Arbitrary Python callbacks and object arrays do not become portable automatically.</p>
+  </div>}
+  {kind === 'jobs' && <div class="job-lifecycle">
+    <ol class="step-rail"><li>Submitted</li><li>Running</li></ol>
+    <div class="terminal-states"><span class="state-success">Succeeded</span><span>Failed</span><span>Canceled</span></div>
+    <p class="branch-note">All three are terminal execution outcomes.</p>
+    <div class="retrieval-path"><strong>Succeeded → fetch → retrieved</strong><p>Then validate the artifact and its input identity. Retrieval is not a new scientific calculation.</p></div>
+  </div>}
+  {kind === 'tool-call' && <div>
+    <ol class="process-steps tool-steps"><li><strong>Resolve the output</strong><span>Inspect the existing-file / overwrite policy.</span></li><li><strong>Load the structure</strong><span>Preserve geometry, charge, spin, and basis.</span></li><li><strong>Configure the registered solver</strong><span>Use the supported settings contract.</span></li><li><strong>Execute via the shared helper</strong><span>Local, cache, and remote choices differ.</span></li><li><strong>Save and report</strong><span>Return energy, artifact identity, and actual status.</span></li></ol>
+    <p class="diagram-note"><strong>Separate branch:</strong> “exists” means a valid file was found, not that the newly requested calculation ran.</p>
+  </div>}
+  {kind === 'test-layers' && <dl class="evidence-layers">
+    <div><dt>Format, lint, types</dt><dd>Syntax and supported interfaces<p>Not a test of chemical adequacy.</p></dd></div>
+    <div><dt>Numerical unit tests</dt><dd>Local invariants and tolerances<p>Not every cross-package combination.</p></dd></div>
+    <div><dt>Integration tests</dt><dd>Data and capability handoffs<p>Only the tested configurations.</p></dd></div>
+    <div><dt>Build and release</dt><dd>Installable artifacts and versioned docs<p>Not a universal performance guarantee.</p></dd></div>
+  </dl>}
+  {kind === 'handoffs' && <div class="handoff-map">
+    <div class="handoff-lanes"><section><strong>Application + chemistry</strong><p>Question, model, target accuracy, reference evidence</p></section><section><strong>Classical + quantum methods</strong><p>Orbitals, operators, trial state, complete workload</p></section></div>
+    <div class="handoff-join"><strong>Compiler + execution</strong><p>Compatible representations, target profile, operation demand</p></div>
+    <div class="handoff-lanes"><section><strong>QEC + hardware</strong><p>Noise, code, timing, factory and decoder assumptions</p></section><section><strong>Resource study + review</strong><p>Conditional cost, reliability, scope, and provenance</p></section></div>
+    <p class="feedback-arrow">↺ If the complete study is not viable, revisit the scientific design without hiding the changed question.</p>
+  </div>}
+</div>

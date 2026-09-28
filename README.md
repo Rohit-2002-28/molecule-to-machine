@@ -15,6 +15,10 @@ caveats, rather than replaced by summaries.
   full-text section search, and a 52-term glossary.
 - 34 lesson-specific vector concept plates, 102 explained knowledge checks,
   and nine interactive educational model types.
+- 46 additional contextual figures beside the relevant original sections:
+  31 quantitative plots and 15 semantic diagrams. The bond-energy curve,
+  shot-error plot, QPE distribution, and synthetic Pareto study have optional
+  keyboard/touch controls; every figure has a complete static fallback.
 - Local-only read markers, bookmarks, saved section, and check answers.
   Reading completion is independent of check results. Clear/reset controls
   and explicit unavailable-storage states are included.
@@ -75,6 +79,30 @@ Release validation requires exactly 34 unique sequential nonplaceholder
 lessons, substantial full bodies, source metadata, successful equations, and
 complete teaching additions. Link validation checks every local link/anchor,
 all fresh lesson routes, and exact original Markdown downloads.
+
+### Contextual figures
+
+`src/data/inline-figures.ts` is the placement and provenance manifest. Each
+figure names one existing section ID and a paragraph count within that section.
+The Markdown pipeline exposes parsed top-level blocks; `inline-placement.ts`
+interleaves Astro figures without splitting code, math, links, or raw strings.
+Missing or ambiguous anchors and insufficient paragraphs fail the build.
+Removing the figure chunks reconstructs the original rendered HTML exactly.
+The original TOC and full-text search index remain sourced only from the corpus.
+
+`src/lib/visual-models.ts` contains bounded analytical teaching functions;
+`plot-data.ts` defines axes, units, series, and responsive SVG geometry.
+Numerical plots expose selected underlying values in accessible tables.
+Examples include a dimensionless Morse potential (not N2 data), exact
+two-state teaching arithmetic, ideal QPE distributions, raw storage/count
+scaling, and explicitly conditional or synthetic resource illustrations.
+No chemistry, hardware, or estimator jobs run in these figures.
+
+The release gate locks the original course file to SHA-256
+`f46926672ecadbbc96a119b09024bf5804d0eaebe5851728f469652199e8b757`.
+`.gitattributes` prevents automatic newline conversion of that immutable input.
+An intentional future revision of the course needs a separately reviewed
+corpus update, not an incidental visual edit.
 
 ## GitHub Pages
 

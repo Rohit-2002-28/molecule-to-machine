@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-28T00:04:59.676Z",
+  "generatedAt": "2026-09-28T01:40:42.677Z",
   "title": "Design System: From Molecule to Machine",
   "extensions": {
     "colorMeta": {
@@ -182,6 +182,13 @@
     ]
   },
   "components": [
+    {
+      "name": "Contextual scientific figure",
+      "kind": "custom",
+      "description": "The new inline caption, provenance, and interpretation shell, shown with exact values from its analytical Morse example. Production plots use generated wide/compact SVG layouts; this component sample demonstrates the reusable textual boundary.",
+      "html": "<figure class=\"ds-inline-figure\"><figcaption><strong>One separation gives one point on an energy curve</strong></figcaption><p class=\"ds-provenance\">Supplementary · Analytical illustration</p><dl><div><dt>Normalized separation x</dt><dd>1</dd></div><div><dt>Relative energy E/Dₑ</dt><dd>−1</dd></div></dl><p class=\"ds-assumptions\"><strong>Model and source.</strong> Illustrative analytical model—not computed N₂ data. E/Dₑ = (1 − exp[−2(x − 1)])² − 1.</p><p class=\"ds-takeaway\"><strong>How to read this.</strong> The minimum is at x = 1; stretching approaches a zero-energy dissociation reference.</p><details><summary>Inspect plotted values</summary><p>The production figure provides labeled coordinate tables from the declared model, not newly computed chemistry.</p></details></figure>",
+      "css": ".ds-inline-figure { margin: 2rem 0 2.3rem; padding: 1.2rem 0 1rem; border-block: 1px solid var(--line); font: 1rem/1.55 var(--ui); color: var(--ink); } .ds-inline-figure figcaption { font-size: 1.15rem; line-height: 1.35; } .ds-inline-figure figcaption strong { font-weight: 650; } .ds-provenance { font-size: .8rem; color: var(--accent); margin: .45rem 0 1.1rem; } .ds-inline-figure dl { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1rem 0; } .ds-inline-figure dt { font-size: .85rem; } .ds-inline-figure dd { margin: .25rem 0 0; font-weight: 600; font-variant-numeric: tabular-nums; } .ds-assumptions, .ds-takeaway { font-size: .9rem; line-height: 1.6; margin: .9rem 0; } .ds-assumptions { color: var(--muted); } .ds-assumptions strong, .ds-takeaway strong { color: var(--ink); } .ds-takeaway { background: var(--ground); padding: .8rem 1rem; } .ds-inline-figure summary { color: var(--accent); cursor: pointer; font-size: .85rem; padding: .45rem 0; } .ds-inline-figure summary:hover { color: var(--accent-hover); } .ds-inline-figure summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-inline-figure details p { font-size: .83rem; color: var(--muted); }"
+    },
     {
       "name": "Primary action",
       "kind": "button",

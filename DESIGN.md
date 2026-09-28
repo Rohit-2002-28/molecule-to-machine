@@ -309,6 +309,40 @@ Model panels visibly identify "Interactive model" and state assumptions before t
 
 Checks use native radio choices in small-round outlined rows. Hover adds ground paper; selection adds cobalt tint and an accent border. Correct feedback uses the green pair; revisit feedback uses the amber pair, with explanatory text. Read completion, selected answers, and answer correctness are distinct states, not interchangeable color decorations.
 
+### Contextual Figures and Quantitative Plots
+
+`InlineFigure.astro` extends the same atlas language inside the original reading
+column. Thin horizontal rules, sans-serif captions, and a visible
+supplement/provenance label distinguish each addition from the serif source
+paragraphs. `inline-figures.ts` maps it to an existing section and paragraph;
+new figures do not introduce competing lesson headings or rewrite source text.
+
+Plots keep quantity/unit labels in HTML and use a dedicated responsive SVG
+coordinate layout: a wide (640 by 320) viewBox or compact (340 by 270) viewBox
+selected by the figure's container width. SVG tick sizes (17 wide / 18 compact
+viewBox units) and direct annotations (16 viewBox units) are coordinate-space
+values, not additional page typography tokens. The compact layout preserves
+readable labels rather than horizontally scrolling a reduced desktop chart.
+These values belong to the plotting component, not the global type ramp.
+
+Cobalt solid lines or filled points identify the primary series. Plum
+comparison lines are dashed, and comparison points/bars are open rather than
+filled. Legends name the series; axes, reference lines, captions, and selected
+value tables carry meaning independently of color. Logarithmic axes explicitly
+say so. A zero or other relevant reference remains stated instead of letting
+an unlabeled truncated axis imply an absolute result.
+
+Model assumptions and a "How to read this" takeaway follow the plot. Analytical,
+synthetic, and source teaching values are identified immediately, never
+presented as newly computed chemistry or hardware results. Numerical data
+disclosures use native `details` and labeled focusable table regions.
+
+Optional separation, shot-count, QPE-grid, and budget controls use the existing
+native inputs and visible readouts. They only enhance complete static
+SVG/HTML. Error messages remove the current-selection claim while leaving the
+underlying labeled model and original lesson accessible. Print retains the
+static plot and assumptions but removes its controls.
+
 ### Dialogs and Notices
 
 Dialog surfaces use the recorded dialog radius, paper color, border, and lift. Search and section navigation retain their own scrollable content; the curriculum variant is a full-height side sheet. Local-storage notices use amber text, fill, and border with their own smaller shadow. Status messaging never replaces the readable lesson.

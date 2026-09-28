@@ -4,9 +4,13 @@ import { course, EXPECTED_LESSONS, wordCount } from '../src/lib/course';
 import { renderMarkdown } from '../src/lib/markdown';
 import { learning } from '../src/data/learning';
 import { glossary } from '../src/data/glossary';
+import { figuresForLesson, inlineFigures } from '../src/data/inline-figures';
+import { interleaveFigures } from '../src/lib/inline-placement';
 
 const release = process.argv.includes('--release');
 const issues: string[] = [];
+const hash = createHash('sha256').update(readFileSync(new URL('../src/content/course.json', import.meta.url))).digest('hex');
+if (hash !== 'f46926672ecadbbc96a119b09024bf5804d0eaebe5851728f469652199e8b757') issues.push('The original course corpus changed. Supplemental visuals must not rewrite its bytes.');
 if (release && course.lessons.length !== EXPECTED_LESSONS) issues.push(`Release requires ${EXPECTED_LESSONS} lessons, found ${course.lessons.length}.`);
 let words = 0;
 let sections = 0;
@@ -29,6 +33,12 @@ for (const [index, lesson] of course.lessons.entries()) {
   if (rendered.sections.length < 3) issues.push(`${label}: insufficient section structure.`);
   if (/<script\b|<iframe\b|\son\w+=|href="javascript:/iu.test(rendered.html)) issues.push(`${label}: unsafe rendered content.`);
   if (rendered.html.includes('class="katex-error"')) issues.push(`${label}: failed equation rendering.`);
+  const figures = figuresForLesson(lesson.number);
+  if (!figures.length) issues.push(`${label}: no contextual figures.`);
+  const chunks = interleaveFigures(rendered.blocks, figures);
+  if (chunks.filter(chunk => chunk.kind === 'html').map(chunk => chunk.html).join('') !== rendered.html) {
+    issues.push(`${label}: inline placement modified the original rendered blocks.`);
+  }
   const extra = learning[lesson.number];
   if (!extra || extra.questions.length !== 3 || !extra.plate.caption || !extra.labContext) {
     issues.push(`${label}: missing three checks, concept plate, or model context.`);
@@ -52,6 +62,5 @@ if (issues.length) {
   console.error(issues.join('\n'));
   process.exitCode = 1;
 } else {
-  const hash = createHash('sha256').update(readFileSync(new URL('../src/content/course.json', import.meta.url))).digest('hex');
-  console.log(`${release ? 'Release' : 'Content'} validation passed: ${course.lessons.length} complete lessons, ${words.toLocaleString()} words, ${sections} sections, ${equations} rendered equations, ${course.lessons.length * 3} checks, ${labs.size} model types, ${glossary.length} glossary terms.\nCorpus SHA256: ${hash}`);
+  console.log(`${release ? 'Release' : 'Content'} validation passed: ${course.lessons.length} complete lessons, ${words.toLocaleString()} words, ${sections} sections, ${equations} rendered equations, ${course.lessons.length * 3} checks, ${labs.size} model types, ${glossary.length} glossary terms, ${inlineFigures.length} contextual figures at verified block anchors.\nCorpus SHA256: ${hash}`);
 }
